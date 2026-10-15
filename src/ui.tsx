@@ -5,7 +5,7 @@ import { wallpapers } from './data'
 export function Pill({ children, as: Tag = 'h2', className = '' }: { children: ReactNode; as?: 'h1' | 'h2'; className?: string }) {
   return (
     <Tag
-      className={`outline-text mx-auto w-fit rounded-full border-4 border-white bg-gradient-to-b from-[#ff4b3a] to-red-dark px-5 py-1 text-center font-display text-xl text-white uppercase italic shadow-[0_3px_0_#0006] sm:text-2xl ${className}`}
+      className={`gloss outline-text mx-auto w-fit rounded-full border-4 border-white bg-gradient-to-b from-[#ff4b3a] to-red-dark px-5 py-1 text-center font-display text-xl text-white uppercase italic shadow-[0_3px_0_#0006] sm:text-2xl ${className}`}
     >
       {children}
     </Tag>
@@ -56,18 +56,40 @@ export function ServeBand() {
 export function WallpaperGrid({ items = wallpapers, cols = 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6' }: { items?: typeof wallpapers; cols?: string }) {
   return (
     <ul className={`grid gap-3 ${cols}`}>
-      {items.map((w) => (
-        <li key={w.code} className="text-center">
+      {items.map((w, i) => (
+        <li key={w.code} className="relative text-center">
+          {i < 2 && (
+            <span className="sticker absolute -top-3 -right-3 z-10 grid size-12 animate-wiggle place-items-center bg-yellow font-display text-[10px] text-red">
+              HOT!
+            </span>
+          )}
           <div
             role="img"
             aria-label={`Fond d’écran ${w.title}`}
-            className="aspect-[9/16] border-2 border-ink shadow-[2px_2px_0_#0005]"
+            className="aspect-[9/16] rounded-lg border-4 border-white shadow-[0_0_0_2px_var(--color-ink),4px_4px_0_2px_#0005]"
             style={{ background: w.bg }}
           />
-          <p className="mt-1 font-display text-sm">{w.code}</p>
+          <p className="mt-1 font-display text-sm">♥ {w.code} ♥</p>
           <p className="text-xs leading-tight font-bold">{w.title}</p>
         </li>
       ))}
     </ul>
   )
 }
+
+// Placeholder "photo": emoji on a gradient, framed like the wallpapers
+export function Thumb({ emoji, bg, className = '' }: { emoji: string; bg: string; className?: string }) {
+  return (
+    <div
+      aria-hidden
+      className={`grid place-items-center rounded-2xl border-4 border-white shadow-[0_0_0_2px_var(--color-ink),4px_4px_0_2px_#0005] ${className}`}
+      style={{ background: bg }}
+    >
+      <span className="drop-shadow-[2px_2px_0_#0006]">{emoji}</span>
+    </div>
+  )
+}
+
+export const stars = (level: number) => '★'.repeat(level) + '☆'.repeat(3 - level)
+
+export const backLink = 'gloss mb-4 inline-block rounded-full bg-ink px-3 py-1 font-display text-xs text-yellow uppercase italic'

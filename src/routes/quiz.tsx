@@ -5,7 +5,7 @@ import { Panel } from '../ui'
 
 export const Route = createFileRoute('/quiz')({ component: Quiz })
 
-const btn = 'rounded-full border-2 border-ink px-4 py-2 font-bold'
+const btn = 'gloss rounded-full border-2 border-ink px-4 py-2 font-bold'
 
 function Quiz() {
   const [answers, setAnswers] = useState<Pibble[]>([])

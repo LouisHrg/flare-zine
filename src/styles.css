@@ -17,12 +17,36 @@
   --font-headline: "Luckiest Guy", system-ui, sans-serif;
   --font-display: "Archivo Black", "Arial Black", sans-serif;
   --font-body: "Roboto Condensed", "Arial Narrow", sans-serif;
+
+  --animate-marquee: marquee 22s linear infinite;
+  --animate-rainbow: rainbow 4s linear infinite;
+  --animate-twinkle: twinkle 1.6s ease-in-out infinite;
+  --animate-wiggle: wiggle 0.8s ease-in-out infinite;
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes rainbow {
+    to { filter: hue-rotate(360deg); }
+  }
+  @keyframes twinkle {
+    50% { opacity: 0.2; transform: scale(0.5) rotate(45deg); }
+  }
+  @keyframes wiggle {
+    50% { transform: rotate(-8deg) scale(1.1); }
+  }
 }
 
 body {
+  /* Sparkle cursor (48px: browsers cap custom cursors around 128px) */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Ctext y='40' font-size='40'%3E%E2%9C%A8%3C/text%3E%3C/svg%3E") 6 6, auto;
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
+}
+
+/* Pink pointing hand on anything clickable */
+a, button, [role="button"], label, summary {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 32 32'%3E%3Cg fill='%23111' stroke='%23111' stroke-width='2.6' stroke-linejoin='round'%3E%3Crect x='11' y='2' width='5' height='16' rx='2.5'/%3E%3Crect x='8' y='12' width='16.5' height='15' rx='5'/%3E%3Crect x='16' y='10.5' width='4.5' height='8' rx='2.2'/%3E%3Crect x='20' y='12' width='4.5' height='8' rx='2.2'/%3E%3Crect x='4.5' y='15' width='5' height='9' rx='2.5' transform='rotate(-30 7 19.5)'/%3E%3C/g%3E%3Cg fill='%23ff9ccc'%3E%3Crect x='11' y='2' width='5' height='16' rx='2.5'/%3E%3Crect x='8' y='12' width='16.5' height='15' rx='5'/%3E%3Crect x='16' y='10.5' width='4.5' height='8' rx='2.2'/%3E%3Crect x='20' y='12' width='4.5' height='8' rx='2.2'/%3E%3Crect x='4.5' y='15' width='5' height='9' rx='2.5' transform='rotate(-30 7 19.5)'/%3E%3C/g%3E%3Cpath d='M16 13v4.5M20.2 14v4' stroke='%23111' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") 17 3, pointer;
 }
 
 /* Paper grain over the whole page, like cheap magazine print */
@@ -51,8 +75,22 @@ body::after {
 /* Light violet ad-page background with a glow */
 @utility page-bg {
   background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cg fill='white'%3E%3Cpath d='M24 8l3 9 9 3-9 3-3 9-3-9-9-3 9-3z' opacity='.8'/%3E%3Cpath d='M100 70l2 6 6 2-6 2-2 6-2-6-6-2 6-2z' opacity='.6'/%3E%3Ccircle cx='70' cy='28' r='2' opacity='.7'/%3E%3Ccircle cx='30' cy='110' r='1.5' opacity='.7'/%3E%3Ctext x='105' y='128' font-size='14' opacity='.5'%3E%E2%99%A5%3C/text%3E%3C/g%3E%3C/svg%3E"),
     radial-gradient(ellipse at 50% 0%, #f1e2ff 0%, transparent 60%),
     linear-gradient(180deg, #c9a2ff, #9b68e8);
+}
+
+/* Glossy "aqua" highlight on buttons and pills */
+@utility gloss {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 2px 10% 50% 10%;
+    border-radius: 999px;
+    background: linear-gradient(#ffffffb0, #fff0);
+    pointer-events: none;
+  }
 }
 
 /* "NEW!" starburst */

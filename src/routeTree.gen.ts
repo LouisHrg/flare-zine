@@ -13,6 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as FondsEcranRouteImport } from './routes/fonds-ecran'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as SonneriesRouteImport } from './routes/sonneries'
+import { Route as InterviewsIndexRouteImport } from './routes/interviews.index'
+import { Route as InterviewsSlugRouteImport } from './routes/interviews.$slug'
+import { Route as LyricsIndexRouteImport } from './routes/lyrics.index'
+import { Route as LyricsSlugRouteImport } from './routes/lyrics.$slug'
+import { Route as TutosIndexRouteImport } from './routes/tutos.index'
+import { Route as TutosSlugRouteImport } from './routes/tutos.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +40,60 @@ const SonneriesRoute = SonneriesRouteImport.update({
   path: '/sonneries',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InterviewsIndexRoute = InterviewsIndexRouteImport.update({
+  id: '/interviews/',
+  path: '/interviews/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InterviewsSlugRoute = InterviewsSlugRouteImport.update({
+  id: '/interviews/$slug',
+  path: '/interviews/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LyricsIndexRoute = LyricsIndexRouteImport.update({
+  id: '/lyrics/',
+  path: '/lyrics/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LyricsSlugRoute = LyricsSlugRouteImport.update({
+  id: '/lyrics/$slug',
+  path: '/lyrics/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TutosIndexRoute = TutosIndexRouteImport.update({
+  id: '/tutos/',
+  path: '/tutos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TutosSlugRoute = TutosSlugRouteImport.update({
+  id: '/tutos/$slug',
+  path: '/tutos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/fonds-ecran': typeof FondsEcranRoute
   '/quiz': typeof QuizRoute
   '/sonneries': typeof SonneriesRoute
+  '/interviews/$slug': typeof InterviewsSlugRoute
+  '/lyrics/$slug': typeof LyricsSlugRoute
+  '/tutos/$slug': typeof TutosSlugRoute
+  '/interviews/': typeof InterviewsIndexRoute
+  '/lyrics/': typeof LyricsIndexRoute
+  '/tutos/': typeof TutosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/fonds-ecran': typeof FondsEcranRoute
   '/quiz': typeof QuizRoute
   '/sonneries': typeof SonneriesRoute
+  '/interviews/$slug': typeof InterviewsSlugRoute
+  '/lyrics/$slug': typeof LyricsSlugRoute
+  '/tutos/$slug': typeof TutosSlugRoute
+  '/interviews': typeof InterviewsIndexRoute
+  '/lyrics': typeof LyricsIndexRoute
+  '/tutos': typeof TutosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +101,50 @@ export interface FileRoutesById {
   '/fonds-ecran': typeof FondsEcranRoute
   '/quiz': typeof QuizRoute
   '/sonneries': typeof SonneriesRoute
+  '/interviews/$slug': typeof InterviewsSlugRoute
+  '/lyrics/$slug': typeof LyricsSlugRoute
+  '/tutos/$slug': typeof TutosSlugRoute
+  '/interviews/': typeof InterviewsIndexRoute
+  '/lyrics/': typeof LyricsIndexRoute
+  '/tutos/': typeof TutosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/fonds-ecran' | '/quiz' | '/sonneries'
+  fullPaths:
+    | '/'
+    | '/fonds-ecran'
+    | '/quiz'
+    | '/sonneries'
+    | '/interviews/$slug'
+    | '/lyrics/$slug'
+    | '/tutos/$slug'
+    | '/interviews/'
+    | '/lyrics/'
+    | '/tutos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/fonds-ecran' | '/quiz' | '/sonneries'
-  id: '__root__' | '/' | '/fonds-ecran' | '/quiz' | '/sonneries'
+  to:
+    | '/'
+    | '/fonds-ecran'
+    | '/quiz'
+    | '/sonneries'
+    | '/interviews/$slug'
+    | '/lyrics/$slug'
+    | '/tutos/$slug'
+    | '/interviews'
+    | '/lyrics'
+    | '/tutos'
+  id:
+    | '__root__'
+    | '/'
+    | '/fonds-ecran'
+    | '/quiz'
+    | '/sonneries'
+    | '/interviews/$slug'
+    | '/lyrics/$slug'
+    | '/tutos/$slug'
+    | '/interviews/'
+    | '/lyrics/'
+    | '/tutos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +152,12 @@ export interface RootRouteChildren {
   FondsEcranRoute: typeof FondsEcranRoute
   QuizRoute: typeof QuizRoute
   SonneriesRoute: typeof SonneriesRoute
+  InterviewsSlugRoute: typeof InterviewsSlugRoute
+  LyricsSlugRoute: typeof LyricsSlugRoute
+  TutosSlugRoute: typeof TutosSlugRoute
+  InterviewsIndexRoute: typeof InterviewsIndexRoute
+  LyricsIndexRoute: typeof LyricsIndexRoute
+  TutosIndexRoute: typeof TutosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +190,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SonneriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/interviews/': {
+      id: '/interviews/'
+      path: '/interviews'
+      fullPath: '/interviews/'
+      preLoaderRoute: typeof InterviewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/interviews/$slug': {
+      id: '/interviews/$slug'
+      path: '/interviews/$slug'
+      fullPath: '/interviews/$slug'
+      preLoaderRoute: typeof InterviewsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lyrics/': {
+      id: '/lyrics/'
+      path: '/lyrics'
+      fullPath: '/lyrics/'
+      preLoaderRoute: typeof LyricsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lyrics/$slug': {
+      id: '/lyrics/$slug'
+      path: '/lyrics/$slug'
+      fullPath: '/lyrics/$slug'
+      preLoaderRoute: typeof LyricsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tutos/': {
+      id: '/tutos/'
+      path: '/tutos'
+      fullPath: '/tutos/'
+      preLoaderRoute: typeof TutosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tutos/$slug': {
+      id: '/tutos/$slug'
+      path: '/tutos/$slug'
+      fullPath: '/tutos/$slug'
+      preLoaderRoute: typeof TutosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +240,12 @@ const rootRouteChildren: RootRouteChildren = {
   FondsEcranRoute: FondsEcranRoute,
   QuizRoute: QuizRoute,
   SonneriesRoute: SonneriesRoute,
+  InterviewsSlugRoute: InterviewsSlugRoute,
+  LyricsSlugRoute: LyricsSlugRoute,
+  TutosSlugRoute: TutosSlugRoute,
+  InterviewsIndexRoute: InterviewsIndexRoute,
+  LyricsIndexRoute: LyricsIndexRoute,
+  TutosIndexRoute: TutosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
