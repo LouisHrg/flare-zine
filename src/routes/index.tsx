@@ -42,14 +42,14 @@ function Home() {
               NEW
             </span>
             <p className="font-headline text-2xl leading-tight">{quiz.title}</p>
-            <p className="mt-2 text-sm font-bold">{quiz.questions.length} questions pour découvrir la star qui sommeille en toi !</p>
+            <p className="mt-2 text-sm font-bold">{quiz.questions.length} questions pour découvrir le Pibble qui sommeille en toi !</p>
           </div>
           <div className="mt-4 rounded-2xl bg-ink p-4 text-white">
             <p className="font-display text-sm text-yellow uppercase">Question 1 : {quiz.questions[0].q}</p>
             <ul className="mt-2 grid gap-1 text-sm font-bold">
               {quiz.questions[0].a.map(([label], i) => (
                 <li key={label}>
-                  <span className="text-orange">{'ABCD'[i]}.</span> {label}
+                  <span className="text-orange">{'ABCDEF'[i]}.</span> {label}
                 </li>
               ))}
             </ul>

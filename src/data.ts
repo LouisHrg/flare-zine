@@ -50,20 +50,77 @@ export const ringtoneCategories = [
 
 export type Ringtone = (typeof ringtoneCategories)[number]['items'][number]
 
-export type Star = 'popstar' | 'rockeuse' | 'rappeur' | 'boysband'
+// Characters from the Pibble Verse Wiki: https://pibble-verse.fandom.com/
+export type Pibble = 'handheld' | 'fire' | 'noctibble' | 'geeble' | 'hampib' | 'beeble'
+
+const img = (path: string) => `https://static.wikia.nocookie.net/pibble-verse/images/${path}/revision/latest/scale-to-width-down/400`
 
 export const quiz = {
-  title: 'Quelle star des années 2000 es-tu ?',
+  title: 'Quel Pibble es-tu ?',
+  source: 'https://pibble-verse.fandom.com/',
   questions: [
-    { q: 'Ton look du samedi ?', a: [['Paillettes partout', 'popstar'], ['Slim noir + clous', 'rockeuse'], ['Baggy XXL', 'rappeur'], ['Tout en blanc, assorti', 'boysband']] },
-    { q: 'Ta sonnerie ?', a: [['Un tube qui passe à la radio', 'popstar'], ['Un riff de guitare', 'rockeuse'], ['Une instru qui cogne', 'rappeur'], ['Une ballade guimauve', 'boysband']] },
-    { q: 'Ton fond d’écran ?', a: [['Cœurs fluo', 'popstar'], ['Damier skate', 'rockeuse'], ['Galaxie Y2K', 'rappeur'], ['Bulles pop', 'boysband']] },
-    { q: 'Le week-end tu…', a: [['Fais du karaoké', 'popstar'], ['Vas à un concert', 'rockeuse'], ['Écris des textes', 'rappeur'], ['Répètes une choré', 'boysband']] },
-  ] as { q: string; a: [string, Star][] }[],
+    {
+      q: 'Ton moment préféré de la journée ?',
+      a: [
+        ['Dans les bras de quelqu’un, évidemment', 'handheld'],
+        ['Quand ça chauffe en cuisine… littéralement', 'fire'],
+        ['La nuit, quand tout le monde dort', 'noctibble'],
+        ['Quand je survole la ville', 'geeble'],
+        ['L’heure du repas (toutes les heures)', 'hampib'],
+        ['Le matin, dans un champ de fleurs', 'beeble'],
+      ],
+    },
+    {
+      q: 'Ta bouffe préférée ?',
+      a: [
+        ['Des Pibble Treats, servies direct dans ma bouche', 'handheld'],
+        ['Un Pibcake… bien cramé', 'fire'],
+        ['Des pibberies grignotées en douce', 'noctibble'],
+        ['Les friandises que je quémande aux fenêtres', 'geeble'],
+        ['Un Piblurger. Rien d’autre. Jamais.', 'hampib'],
+        ['Du miel fait maison', 'beeble'],
+      ],
+    },
+    {
+      q: 'Ton accessoire indispensable ?',
+      a: [
+        ['Une éponge pour qu’on me lave le ventre', 'handheld'],
+        ['Un extincteur (pour les autres)', 'fire'],
+        ['Mon chapeau grenouille', 'noctibble'],
+        ['Mes antennes', 'geeble'],
+        ['Une pancarte « VENEZ, PIBLURGERS MIAM »', 'hampib'],
+        ['Un dard réutilisable', 'beeble'],
+      ],
+    },
+    {
+      q: 'Ton pire cauchemar ?',
+      a: [
+        ['Devoir marcher tout seul', 'handheld'],
+        ['Tomber nez à nez avec un Chis', 'fire'],
+        ['Prendre la pluie', 'noctibble'],
+        ['Qu’on me refuse une friandise', 'geeble'],
+        ['Qu’on me dérange en plein service', 'hampib'],
+        ['Un monde sans fleurs', 'beeble'],
+      ],
+    },
+    {
+      q: 'Ta phrase culte ?',
+      a: [
+        ['« Wash my belly ! »', 'handheld'],
+        ['« Ça va chauffer ! »', 'fire'],
+        ['« Psst… c’est pas moi, c’est un Geeble. »', 'noctibble'],
+        ['« Bip bip ! Une friandise ? »', 'geeble'],
+        ['« Table pour combien ? »', 'hampib'],
+        ['« Bzzz, pas touche à ma ruche ! »', 'beeble'],
+      ],
+    },
+  ] as { q: string; a: [string, Pibble][] }[],
   results: {
-    popstar: { title: 'Pop princess ✨', text: 'Tu brilles, tu chantes sous la douche et tout le monde connaît tes refrains par cœur.' },
-    rockeuse: { title: 'Rock rebelle 🎸', text: 'Eyeliner, guitare et attitude : tu fais ta loi et tu montes le son.' },
-    rappeur: { title: 'Roi du flow 🎤', text: 'Les mots, c’est ton truc. Ton style est unique et ta casquette toujours de travers.' },
-    boysband: { title: 'Star de boys band 💖', text: 'Choré synchro et sourire ravageur : ton fan-club est déjà complet.' },
-  } satisfies Record<Star, { title: string; text: string }>,
+    handheld: { img: img('e/ee/Handheldpibble.png'), title: 'Handheld Pibble 🤲', text: 'Aussi appelé OG Pibble. Tu adores qu’on te porte, tu détestes être sale et tu réclames qu’on te lave le ventre. Les humains te protègent comme un trésor… mais pense à marcher un peu !' },
+    fire: { img: img('9/9e/Ignore_watermark_pibble.png'), title: 'Fire Pibble 🔥', text: 'Un Gmail coincé dans le four avec un Pibcake : voilà tes origines. Résistant au feu, tu es l’atout n°1 de l’armée de Pibbleland et l’ennemi juré des Chis.' },
+    noctibble: { img: img('2/2a/Black%21.jpg'), title: 'Noctibble 🌙', text: 'Tu dors le jour et tu vis la nuit. Toujours coiffé de ton chapeau grenouille, tu te fais passer pour un Geeble… et tu te figes dès qu’on te mouille.' },
+    geeble: { img: img('8/85/Geeblenew.png'), title: 'Geeble 👽', text: 'Petit alien vert venu de Geeblorg, tu voles de fenêtre en fenêtre pour réclamer des Pibble Treats avec ta voix toute aiguë. Refusé ? Pas grave, tu repars en volant.' },
+    hampib: { img: img('3/3b/Hamburger.jpg'), title: 'Hampib 🍔', text: 'Ton corps est un burger (non comestible). Tu ne manges que des Piblurgers, tu cuisines comme un chef et tu bosses 10 h par jour. Gare à qui t’interrompt en plein service !' },
+    beeble: { img: img('7/71/Beeble.webp'), title: 'Beeble 🐝', text: 'Tu butines, tu fais du miel et tu pollinises 30 % des fleurs. Espèce protégée par la loi… et ton dard ne casse jamais. Pas touche à ta ruche !' },
+  } satisfies Record<Pibble, { img: string; title: string; text: string }>,
 }
